@@ -57,7 +57,7 @@ let process_error err =
   | Custom handler -> handler err; Nil
 
 let interpret_function ctx name params =
-  let invalid_function_name _ _ = Error "Invalid function name!" in
+  let invalid_function_name _ _ = Error (Printf.sprintf "Invalid function name: %s" name) in
 
   let func =
     match Std.function_from_id name with
