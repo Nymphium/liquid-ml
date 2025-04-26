@@ -53,9 +53,11 @@ and is_calling ctx id c =
 and unwrap_chain ctx id =
   let folder (acc_val, acc_ctx) hd =
     match acc_val with
-    | Nil -> Ctx.find hd acc_ctx, acc_ctx
+    | Nil ->
+      let v = Ctx.find_opt hd acc_ctx |> Option.value ~default:Nil in
+      v, acc_ctx
     | Object obj -> (
-      let nv = Object.find hd obj in
+      let nv = Object.find_opt hd obj |> Option.value ~default:Nil in
       nv, Ctx.empty |> Ctx.add hd nv
     )
     | v -> (
