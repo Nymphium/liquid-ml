@@ -1,2 +1,2 @@
 (lang dune 2.5)
-(name liquid)
+(name liquid_ml)
